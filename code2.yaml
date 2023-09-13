@@ -10,7 +10,7 @@
         apt:
           name: passwd
           state: present
-        when: ansible_distribution in "Debian, ubuntu"
+        when: ansible_distribution not in "Debian, Ubuntu"
         tags:
           - app1  
       - name: create group
@@ -29,12 +29,12 @@
         apt:
            name: apache2
            state: present
-      - name: start apache2 daemon
-        service:
-            name: apache2
-            state: started
-            enabled: yes
-            tags:
+      - name: start apache service
+        service: 
+          name: apache2 
+          state: started
+          enabled: yes
+        tags:
               - service
       - name: copy index file
         copy:
